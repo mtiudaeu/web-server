@@ -15,7 +15,7 @@ var handleRequest = function(request, response) {
 	const path = request.url.substr(1);
 	console.log("Request : ", path);
 	if(!fs.existsSync(path)){
-		//mdtmp error
+		console.log("Invalid Request : ", path);
 		return;
 	}
 
