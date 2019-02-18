@@ -1,8 +1,8 @@
 'use strict';
 
-let staticState = {}
-let staticView = {}
-let staticRoot = {}
+let staticState = undefined
+let staticView = undefined
+let staticRoot = undefined
 function PlaySet(newState) {
 	staticState = newState
 	console.log(`PlaySet  : ${staticState}`)
@@ -17,5 +17,8 @@ function PlayRender() {
 	// mdtmp Could probably resolve this each time useing tag function...
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 	//
-	root.innerHTML = staticView
+	if(!staticState) return
+	if(!staticView) return
+	if(!staticRoot) return
+	staticRoot.innerHTML = staticView(staticState)
 }
