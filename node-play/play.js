@@ -4,67 +4,52 @@ let staticModified = [] //mdtmp check duplicate??
 let staticState = {}
 let staticView = undefined
 let staticRoot = undefined
+let staticIndex = 0
 
-function getLastElem(pathStr) {
-	//mdtmp duplicated code
+function getValidLastElem(pathStr) {
 	const paths = pathStr.split("/")
 	if(paths.length===0) {return undefined}
 
-	const lastElementIdx = paths.length-1
 	let itrElem = staticState
-	{ // iterate to the deepest child
-		for(let i=0; i < lastElementIdx; ++i){
-			const propertyStr = paths[i]
-			if(!itrElem.hasOwnProperty(propertyStr)) {
-				// create parent property if doesn't exist
-				itrElem[propertyStr] = {}
-			}
-			itrElem = itrElem[propertyStr]
+	for(const propertyStr of paths) {
+		if(!itrElem.hasOwnProperty(propertyStr)) {
+			// create parent property if doesn't exist
+			itrElem[propertyStr] = {"id":staticIndex++}
 		}
+		itrElem = itrElem[propertyStr]
 	}
-	return itrElem[paths[lastElementIdx]]
+	return itrElem
 }
 
-function PlaySet(pathStr, newState) {
-	const paths = pathStr.split("/")
-	if(paths.length===0) {return}
+function PlaySetState(pathStr, newState) {
+	const itrElem = getValidLastElem(pathStr)
+	if(!itrElem) return
 
-	const lastElementIdx = paths.length-1
-	let itrElem = staticState
-	{ // iterate to the deepest child
-		for(let i=0; i < lastElementIdx; ++i){
-			const propertyStr = paths[i]
-			if(!itrElem.hasOwnProperty(propertyStr)) {
-				// create parent property if doesn't exist
-				itrElem[propertyStr] = {}
-			}
-			itrElem = itrElem[propertyStr]
-		}
-	}
-
-	//mdtmp could push modified path for every change and
-	//pop change from path to view...
-	itrElem[paths[lastElementIdx]] = newState
+	itrElem["value"] = newState
 	staticModified.push(pathStr)
-
-	console.log("PlaySet  : ")
-	console.log(staticState)
-	PlayRender() // put render somewhere else?
+	PlayRender() // mdtmp ... put render somewhere else?
 }
 
-function PlayInit(id, view) {
-	staticView = view
-	staticRoot = document.getElementById("root")
+function PlaySetView(pathStr, view) {
+	const itrElem = getValidLastElem(pathStr)
+	if(!itrElem) return
+	
+	itrElem["view"] = view
 }
+
+function PlayInit(id) {
+	staticRoot = document.getElementById(id)
+}
+
 function PlayRender() {
 	if(!staticState) return
-	if(!staticView) return
 	if(!staticRoot) return
 
 	if(staticModified.length===0) return
 	const pathStr = staticModified[staticModified.length-1]
 	staticModified.pop()
 
-	const elem = getLastElem(pathStr)
-	staticRoot.innerHTML = staticView(pathStr, elem)
+	const elem = getValidLastElem(pathStr)
+	staticRoot.innerHTML = `<div id=Play${elem.id}>` + elem.view(pathStr, elem.value) + "</div>";
 }
+
