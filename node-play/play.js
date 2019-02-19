@@ -1,6 +1,6 @@
 'use strict';
 
-let staticModified = [] //mdtmp check duplicate??
+let staticModified = [] //FIXME
 let staticState = {}
 let staticRoot = undefined
 let staticIndex = 0
@@ -24,11 +24,12 @@ function PlayInit(id) {
 	staticRoot = document.getElementById(id)
 }
 
-function PlaySetView(pathStr, view) {
+function PlaySetViewState(pathStr, view, newState) {
 	const elem = getValidLastElem(pathStr)
 	if(!elem) return
 	
 	elem["view"] = view
+	elem["value"] = newState
 
 	if(!staticRoot) return
 	staticRoot.innerHTML += `<div id=Play${elem.id}>` + elem.view(pathStr, elem.value) + "</div>";
@@ -38,6 +39,7 @@ function PlaySetView(pathStr, view) {
 function PlaySetState(pathStr, newState) {
 	const elem = getValidLastElem(pathStr)
 	if(!elem) return
+
 	elem["value"] = newState
 
 	staticModified.push(pathStr)
@@ -47,12 +49,11 @@ function PlaySetState(pathStr, newState) {
 function PlayRender() {
 	if(staticModified.length===0) return
 	const pathStr = staticModified[staticModified.length-1]
-	staticModified.pop()
+	staticModified.pop() //FIXME loop!
 
 	const elem = getValidLastElem(pathStr)
 	let htmlElem = document.getElementById(`Play${elem.id}`)
 	if(!htmlElem) return
 	htmlElem.innerHTML = elem.view(pathStr, elem.value)
-	console.log(staticState) //mdtmp
 }
 
