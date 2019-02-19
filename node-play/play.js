@@ -2,7 +2,6 @@
 
 let staticModified = [] //mdtmp check duplicate??
 let staticState = {}
-let staticView = undefined
 let staticRoot = undefined
 let staticIndex = 0
 
@@ -13,7 +12,7 @@ function getValidLastElem(pathStr) {
 	let itrElem = staticState
 	for(const propertyStr of paths) {
 		if(!itrElem.hasOwnProperty(propertyStr)) {
-			// create parent property if doesn't exist
+			// create element if doesn't exist
 			itrElem[propertyStr] = {"id":staticIndex++}
 		}
 		itrElem = itrElem[propertyStr]
@@ -21,35 +20,39 @@ function getValidLastElem(pathStr) {
 	return itrElem
 }
 
-function PlaySetState(pathStr, newState) {
-	const itrElem = getValidLastElem(pathStr)
-	if(!itrElem) return
-
-	itrElem["value"] = newState
-	staticModified.push(pathStr)
-	PlayRender() // mdtmp ... put render somewhere else?
-}
-
-function PlaySetView(pathStr, view) {
-	const itrElem = getValidLastElem(pathStr)
-	if(!itrElem) return
-	
-	itrElem["view"] = view
-}
-
 function PlayInit(id) {
 	staticRoot = document.getElementById(id)
 }
 
-function PlayRender() {
-	if(!staticState) return
-	if(!staticRoot) return
+function PlaySetView(pathStr, view) {
+	const elem = getValidLastElem(pathStr)
+	if(!elem) return
+	
+	elem["view"] = view
 
+	if(!staticRoot) return
+	staticRoot.innerHTML += `<div id=Play${elem.id}>` + elem.view(pathStr, elem.value) + "</div>";
+}
+
+
+function PlaySetState(pathStr, newState) {
+	const elem = getValidLastElem(pathStr)
+	if(!elem) return
+	elem["value"] = newState
+
+	staticModified.push(pathStr)
+	PlayRender()
+}
+
+function PlayRender() {
 	if(staticModified.length===0) return
 	const pathStr = staticModified[staticModified.length-1]
 	staticModified.pop()
 
 	const elem = getValidLastElem(pathStr)
-	staticRoot.innerHTML = `<div id=Play${elem.id}>` + elem.view(pathStr, elem.value) + "</div>";
+	let htmlElem = document.getElementById(`Play${elem.id}`)
+	if(!htmlElem) return
+	htmlElem.innerHTML = elem.view(pathStr, elem.value)
+	console.log(staticState) //mdtmp
 }
 
