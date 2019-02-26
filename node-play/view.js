@@ -1,7 +1,6 @@
 'use strict';
 
 const PN_View = function(path, pnState) {
-
 	let childrenHTML = ""
 	const views = PN_Global_Get_All_Views(pnState)
 	for(let view of views) {
@@ -9,11 +8,13 @@ const PN_View = function(path, pnState) {
 	}
 	childrenHTML = `<div> Childrens: ${childrenHTML}</div>`
 
-	//mdtmp PlaySetState should push a global action that get caught somewhere
+	const action = PN_Global_Action_AddViews(pnState)
+
+	//FIXME bootstrap button
 	return `
 		<p>Focus View : ${pnState.focusView}</p>
 		${childrenHTML}
-		<button onclick=PlaySetState("${path}","BuuUUUuuUUuuton1") type="button">Add Views</button> 
+		<button onclick=${action} type="button">Add Views</button> 
 		`
 }
 

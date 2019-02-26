@@ -1,33 +1,43 @@
 'use strict';
 
 //---------- Global ----------
-//return: GlobalState
 function PN_Global_Create() {
 	return {
 		idItr:0,
-		focusView:undefined
+		focusView:undefined,
+		trigger:undefined
 	}
 }
 
-//globalState: GlobalState
 //viewId: number
-function PN_Global_Focus_View(globalState, viewId) {
-	globalState.focusView = viewId
+function PN_Global_Focus_View(pnState, viewId) {
+	pnState.focusView = viewId
 }
 
-//globalState: GlobalState
 //return: number[]
-function PN_Global_Get_All_Views(globalState) {
+function PN_Global_Get_All_Views(pnState) {
 	//mdtmp unimplemented
 	return [1,2]
 }
 
+function PN_Global_Set_Catch_Event(pnState, action) {
+	//mdtmp unimplemented
+	console.log(pnState)
+	console.log(action)
+}
+
+function PN_Global_Set_Trigger(pnState, trigger) {
+	pnState.trigger = trigger
+}
+
+function PN_Global_Action_AddViews(pnState) {
+	return `${pnState.trigger}("ADD_VIEW")`
+}
 
 //---------- Nav ----------
-//globalState: GlobalState
-function PN_Nav_State_Create(globalState) {
-	const id = globalState.idItr++
-	globalState[id] = 
+function PN_Nav_State_Create(pnState) {
+	const id = pnState.idItr++
+	pnState[id] = 
 		{
 			viewType:"Navigation",
 			viewId:id,
@@ -35,10 +45,9 @@ function PN_Nav_State_Create(globalState) {
 			parentView:undefined,
 			title:undefined
 		}
-	return globalState[id]
+	return pnState[id]
 }
 
-//navState: NavState
 function PN_Nav_State_Get_Id(navState) {
 	return navState.viewId
 }

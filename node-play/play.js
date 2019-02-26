@@ -4,6 +4,7 @@ let staticModified = [] //FIXME
 let staticState = {}
 let staticRoot = undefined
 let staticIndex = 0
+let staticCatchEvent = undefined
 
 function getValidLastElem(pathStr) {
 	const paths = pathStr.split("/")
@@ -20,8 +21,9 @@ function getValidLastElem(pathStr) {
 	return itrElem
 }
 
-function PlayInit(id) {
+function PlayInit(id, catchEvent) {
 	staticRoot = document.getElementById(id)
+	staticCatchEvent = catchEvent
 }
 
 function PlaySetViewState(pathStr, view, newState) {
@@ -57,3 +59,8 @@ function PlayRender() {
 	htmlElem.innerHTML = elem.view(pathStr, elem.value)
 }
 
+function PlayTriggerEvent(action) {
+	if(!staticCatchEvent) return
+	staticCatchEvent(action)
+	PlayRender()
+}
