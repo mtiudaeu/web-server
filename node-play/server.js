@@ -15,6 +15,8 @@ var handleRequest = function(request, response) {
 	const path = request.url.substr(1);
 	console.log("Request : ", path);
 	if(!fs.existsSync(path)){
+		response.statusCode = 404;
+		response.end();
 		console.log("Invalid Request : ", path);
 		return;
 	}
