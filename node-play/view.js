@@ -1,5 +1,13 @@
 'use strict';
 
+const NavigationView = function(path, title)
+{ //mdtmp
+	return `<p>${title}</p>
+		<button onclick=PlaySetState("${path}","BuuUUUuuUUuuton1") type="button">Click Me 2!</button> 
+		`
+}
+
+
 const view1 = function(path, title)
 {
 	return `<p>${title}</p>
