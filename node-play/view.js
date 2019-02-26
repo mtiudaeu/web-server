@@ -2,7 +2,7 @@
 
 const PN_View = function(path, pnState) {
 	let childrenHTML = ""
-	const views = PN_Global_Get_All_Views(pnState)
+	const views = PN_Global_Views(pnState)
 	for(let view of views) {
 		childrenHTML += `<p>${view}</p>`
 	}
