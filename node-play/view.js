@@ -1,6 +1,7 @@
 'use strict';
 
 const PN_View = function(path, pnState) {
+	console.log("PN_View")
 	let childrenHTML = ""
 	const views = PN_Global_Get_All_Views(pnState)
 	for(let view of views) {

@@ -19,7 +19,8 @@ PlayInit("root", catchEvent)
 
 const pnPath = "pn"
 PlaySetViewState(pnPath, PN_View, pnState)
-
+const notify = () => {PlaySetState(pnPath, pnState)}
+PN_Global_Set_Notifier(pnState,notify)
 
 
 /*
