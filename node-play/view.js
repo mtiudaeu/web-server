@@ -1,13 +1,36 @@
 'use strict';
 
-const NavigationView = function(path, title)
-{ //mdtmp
-	return `<p>${title}</p>
-		<button onclick=PlaySetState("${path}","BuuUUUuuUUuuton1") type="button">Click Me 2!</button> 
+const PN_View = function(path, pnState) {
+
+	let childrenHTML = ""
+	const views = PN_Global_Get_All_Views(pnState)
+	for(let view of views) {
+		childrenHTML += `<p>${view}</p>`
+	}
+	childrenHTML = `<div> Childrens: ${childrenHTML}</div>`
+
+	//mdtmp PlaySetState should push a global action that get caught somewhere
+	return `
+		<p>Focus View : ${pnState.focusView}</p>
+		${childrenHTML}
+		<button onclick=PlaySetState("${path}","BuuUUUuuUUuuton1") type="button">Add Views</button> 
 		`
 }
 
 
+//mdtmp
+const NavigationView = function(path, state)
+{ //mdtmp
+	let childrenHTML = ""
+	for(let children of state.childrenViews) {
+		childrenHTML += `<p>${children}</p>`
+	}
+
+	return `<p>${state.title}</p>` + childrenHTML
+}
+
+
+//TODO remove below
 const view1 = function(path, title)
 {
 	return `<p>${title}</p>
