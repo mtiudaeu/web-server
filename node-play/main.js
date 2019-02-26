@@ -1,12 +1,5 @@
 'use strict';
 
-/*mdtmp 
-PlayInit("root")
-
-const nav1Path = "nav1"
-PlaySetViewState(nav1Path, NavigationView, nav1State)
-*/
-
 
 const pnState = PN_Global_Create()
 PN_Global_Set_Trigger(pnState,"PlayTriggerEvent")
@@ -22,12 +15,3 @@ PlaySetViewState(pnPath, PN_View, pnState)
 const notify = () => {PlaySetState(pnPath, pnState)}
 PN_Global_Set_Notifier(pnState,notify)
 
-
-/*
-const pathView1 = "view1/title"
-PlaySetViewState(pathView1, view1, state1)
-const pathView2 = "view2"
-PlaySetViewState(pathView2, view2, state2)
-const pathView3 = "view3"
-PlaySetViewState(pathView3, view3, state3)
-*/

@@ -1,7 +1,6 @@
 'use strict';
 
 const PN_View = function(path, pnState) {
-	console.log("PN_View")
 	let childrenHTML = ""
 	const views = PN_Global_Get_All_Views(pnState)
 	for(let view of views) {
@@ -13,9 +12,9 @@ const PN_View = function(path, pnState) {
 
 	//FIXME bootstrap button
 	return `
+		<button onclick=${action} type="button">Add Views</button> 
 		<p>Focus View : ${pnState.focusView}</p>
 		${childrenHTML}
-		<button onclick=${action} type="button">Add Views</button> 
 		`
 }
 
@@ -32,6 +31,7 @@ const NavigationView = function(path, state)
 }
 
 
+/*
 //TODO remove below
 const view1 = function(path, title)
 {
@@ -112,3 +112,4 @@ const view3 = function(path, state)
 		</div>
 		</div>`
 }
+*/
