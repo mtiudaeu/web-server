@@ -14,14 +14,15 @@ const PN_View = function(path, pnState) {
 			`
 
 	}
-	const action = PN_Global_Action_AddViews(pnState)
+	const addViewAction = PN_Global_Action_AddViews(pnState)
+	const clickOnCard = PN_Global_Action_clickOnCard(pnState)
 
 	//FIXME Add header (no scrolldown)
 	//		"Add Views" button into the header.
 	return `
-		<button onclick=${action} type="button">Add Views</button> 
+		<button onclick=${addViewAction} type="button">Add Views</button> 
 		<p>Focus View : ${pnState.focusView}</p>
-		<div class="card-columns" style="column-count:4;padding:5rem">
+		<div onclick=${clickOnCard} class="card-columns" style="column-count:4;padding:5rem">
 		${childrenHTML}
 		</div>
 		`
