@@ -32,7 +32,10 @@ function PN_Global_Set_Notifier(pnState, notify) {
 	pnState.notify = notify
 }
 function PN_Global_Action_AddViews(pnState) {
-	return `${pnState.trigger}("ADD_VIEW")`
+	return PN_Global_Action(pnState, "ADD_VIEW")
+}
+function PN_Global_Action(pnState, action) {
+	return `${pnState.trigger}("${action}")`
 }
 
 //---------- Nav ----------
