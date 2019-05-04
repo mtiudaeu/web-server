@@ -1,0 +1,52 @@
+Calendar Data Model (props)
+
+json
+{
+calendar:
+{
+"2019/05/13": [
+{
+	eventName:"eventName1",
+	hourStart:"10h30",
+	duration:"45min",
+	description:""
+},
+{
+	eventName:"eventName2",
+	hourStart:"11h30",
+	duration:"1h",
+	description:""
+}
+],
+"2019/05/14": [
+{
+	eventName:"eventName3",
+	hourStart:"10h30",
+	duration:"45min",
+	description:""
+},
+{
+	eventName:"eventName4",
+	hourStart:"11h30",
+	duration:"1h",
+	description:""
+}
+]
+}
+}
+
+UI
+Calendar
+A Month (not now)
+A Week ( not now)
+A Day
+	One event
+		title
+		description
+Plus button (add event)
+
+
+State
+Which day active (Init to now)
+Which hour active (Init to now)
+
