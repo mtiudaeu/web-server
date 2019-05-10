@@ -10,7 +10,17 @@
   to { transform: rotate(360deg); }
 }
 
+.Calendar {
+	display:flex;
+	width: 40em;
+}
+.CalendarSideBarHour {
+	order: 0;
+	width: 3em;
+}
 .CalendarDay {
+	order: 1;
+	width: 100%;
 	border-style: solid;
 	border-radius: .3em;
 	border-width: 0.11em;
