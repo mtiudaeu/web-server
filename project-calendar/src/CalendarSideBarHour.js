@@ -10,7 +10,7 @@ class CalendarSideBarHour extends Component {
 		let ret = []
 			const NB_OF_HOURS=24
 			for(let i=0; i<NB_OF_HOURS; i++){
-				ret.push(<div style={{height:height}}>{i}</div>)
+				ret.push(<div key={i} style={{height:height}}>{i}</div>)
 
 			}
 		return ret;

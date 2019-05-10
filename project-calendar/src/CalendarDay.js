@@ -11,7 +11,7 @@ class CalendarDay extends Component {
 		let ret = []
 			const NB_OF_HOURS=24
 			for(let i=0; i<NB_OF_HOURS; i++){
-				ret.push(<CalendarHour/>)
+				ret.push(<CalendarHour key={i} height={height}/>)
 			}
 		return ret;
 	}
