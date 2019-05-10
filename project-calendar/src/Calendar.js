@@ -8,6 +8,10 @@ const STYLE_SQUARE_HEIGHT = "5em";
 
 class Calendar extends Component {
 
+	renderHoursSideBar() {
+		return (<CalendarSideBarHour height={STYLE_SQUARE_HEIGHT} />)
+	}
+
 	renderDays() {
 		let ret = []
 		for(let i=0; i<STYLE_NB_OF_DAYS; i++){
@@ -19,7 +23,7 @@ class Calendar extends Component {
 	render() {
 		return (
 				<div className="Calendar">
-				<CalendarSideBarHour height={STYLE_SQUARE_HEIGHT} />
+				{this.renderHoursSideBar()}
 				{this.renderDays()}
 				</div>
 			   );
