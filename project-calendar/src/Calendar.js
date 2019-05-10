@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 
-import CalendarDay from './CalendarDay.js'
 import CalendarSideBarHour from './CalendarSideBarHour.js'
+import CalendarDay from './CalendarDay.js'
+import CalendarLine from './CalendarLine.js'
 
 const STYLE_NB_OF_DAYS = 3;
-const STYLE_SQUARE_HEIGHT = "5em";
+const STYLE_SQUARE_HEIGHT = "4.9em";
+const STYLE_SIDE_BAR_WIDTH = "3em";
 
 class Calendar extends Component {
 
 	renderHoursSideBar() {
-		return (<CalendarSideBarHour height={STYLE_SQUARE_HEIGHT} />)
+		return (<CalendarSideBarHour 
+					width={STYLE_SIDE_BAR_WIDTH}
+					height={STYLE_SQUARE_HEIGHT} />)
 	}
 
 	renderDays() {
@@ -19,12 +23,16 @@ class Calendar extends Component {
 		}
 		return ret;
 	}
+	renderCalendarLine() {
+		return (<CalendarLine positionFromTop={"13em"} positionFromLeft={STYLE_SIDE_BAR_WIDTH} />)
+	}
 
 	render() {
 		return (
 				<div className="Calendar">
 				{this.renderHoursSideBar()}
 				{this.renderDays()}
+				{this.renderCalendarLine()}
 				</div>
 			   );
 	}

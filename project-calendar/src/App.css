@@ -16,18 +16,23 @@
 }
 .CalendarSideBarHour {
 	order: 0;
-	width: 3em;
 }
 .CalendarDay {
 	order: 1;
 	width: 100%;
 	border-style: solid;
 	border-radius: .3em;
-	border-width: 0.11em;
+	border-width: 0.1em;
 	border-color: #c9c8c8
 }
 .CalendarHour {
 	border-style: solid;
-	border-width: 0.11em;
+	border-width: 0.1em;
 	border-color: #c9c8c8
+}
+.CalendarLine{
+	width: 100%;
+	border-width: 0.1em;
+	border-bottom: solid;
+	border-bottom-color: #aeaeae;
 }
