@@ -36,3 +36,8 @@
 	border-bottom: solid;
 	border-bottom-color: #aeaeae;
 }
+.CalendarEvent{
+	background: black;
+	position: absolute;
+	width: 200px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CalendarHour from './CalendarHour.js'
+import CalendarEvent from './CalendarEvent.js'
 
 class CalendarDay extends Component {
 	renderHours(){
@@ -13,7 +14,11 @@ class CalendarDay extends Component {
 			for(let i=0; i<NB_OF_HOURS; i++){
 				ret.push(<CalendarHour key={i} height={height}/>)
 			}
-		return ret;
+		//mdtmp
+		ret.push(<CalendarEvent heightPerHour={"10em"} />)
+		return (<div>
+					{ret}
+				</div>);
 	}
 
 	render() {
