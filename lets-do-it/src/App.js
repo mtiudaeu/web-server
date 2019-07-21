@@ -4,25 +4,29 @@ import './App.css';
 
 
 function SimpleView(props) {
+	let title = "TEST"
+	if(props.entity){
+		title = props.entity["compSimpleView"].title
+	}
 	return (
 		<div className="App">
-		<header className="App-header">
-		<img src={logo} className="App-logo" alt="logo" />
-		</header>
+		<div>{title}</div>
+		<button onClick={props.createFirstEntity} >
+		Add View
+		</button>
 		</div>
 	)
 }
 
 
 function Selector() {
+	const [count, setCount] = useState(0);
 	const [globalState, setGlobalState] = useState(
 		{
 			headEntity: null,
 			arrayEntities: [],
 			deletedEntities: []
 		});
-	//mdtmp
-	console.log(globalState)
 
 	const addNode = () => {
 		const id = globalState.arrayEntities.length
@@ -31,7 +35,7 @@ function Selector() {
 		}
 
 		globalState.arrayEntities.push(newEntity)
-		setGlobalState(globalState)
+		//mdtmp setGlobalState(globalState)
 		return id;
 	};
 
@@ -67,37 +71,43 @@ function Selector() {
 		}
 		entity[COMP_VIEW].title = title
 
-		setGlobalState(globalState)
+		//mdtmp setGlobalState(globalState)
 	}
 
 	const setHead = (props) => {
 		globalState.headEntity = globalState.arrayEntities[props.id]
-		setGlobalState(globalState)
+		//mdtmp setGlobalState(globalState)
 	}
 
-	if(!globalState.headEntity) {
-		const createFirstEntity = () => {
-			const id = addNode();			
-			setView({
-				id:id,
-				title:`mdtmp{id}`
-			});
-			setHead({
-				id:id
-			})
+	function createFirstEntitymdtmp() {
+		const id = globalState.arrayEntities.length
+		const newEntity = {
+			id:id
 		}
-		return (
-			<div>
-			<button onClick={createFirstEntity} >
-			Add View
-			</button>
-			</div>
-		)
+		globalState.arrayEntities.push(newEntity)
+
+		const COMP_VIEW = "compSimpleView"
+
+		const title = `mdtmp${id}`
+		const entity = globalState.arrayEntities[id]
+		if(!entity[COMP_VIEW]) {
+			entity[COMP_VIEW] = {}
+		}
+		entity[COMP_VIEW].title = title
+
+		globalState.headEntity = globalState.arrayEntities[id]
+
+		setGlobalState(globalState)
 	}
 
 	return (
 		<div>
-		<SimpleView/>
+		<SimpleView 
+			createFirstEntity={createFirstEntitymdtmp}
+			entity={globalState.headEntity}/>
+		<button onClick={()=>{setCount(count+1)}} >
+		</button>
+		<div>{count}</div>
 		</div>
 	)
 }
