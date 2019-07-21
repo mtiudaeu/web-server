@@ -2,51 +2,44 @@ import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-//mdmtp
-/*
-   -GlobalState
-   headEntity
-   arrayEntities
-   deletedEntities
 
-   -CurrentViewer
-//displaycurrentNode
+function SimpleView(props) {
+	return (
+		<div className="App">
+		<header className="App-header">
+		<img src={logo} className="App-logo" alt="logo" />
+		</header>
+		</div>
+	)
+}
 
--nodeComponent
-Connections
-Views(...)
 
-*/
-
-function SimpleView(props){
-
-	}
-
-function App() {
-
+function Selector() {
 	const [globalState, setGlobalState] = useState(
 		{
 			headEntity: null,
 			arrayEntities: [],
 			deletedEntities: []
 		});
+	//mdtmp
+	console.log(globalState)
 
 	const addNode = () => {
-
 		const id = globalState.arrayEntities.length
 		const newEntity = {
-			id:id,
-			components:[]
+			id:id
 		}
 
 		globalState.arrayEntities.push(newEntity)
 		setGlobalState(globalState)
+		return id;
 	};
 
 	const setConnection = (props) => {
 		const COMP_CONN = "compConnections"
 
-		const id1, id2 = {...props}
+		const id1 = props.id1
+		const id2 = props.id2
 		const entity1 = globalState.arrayEntities[id1]
 		const entity2 = globalState.arrayEntities[id2]
 
@@ -66,24 +59,55 @@ function App() {
 	const setView = (props) => {
 		const COMP_VIEW = "compSimpleView"
 
-		const id, title = {...props}
+		const id = props.id
+		const title = props.title
 		const entity = globalState.arrayEntities[id]
 		if(!entity[COMP_VIEW]) {
-			entity[COMP_VIEW] = []
+			entity[COMP_VIEW] = {}
 		}
 		entity[COMP_VIEW].title = title
 
 		setGlobalState(globalState)
 	}
 
+	const setHead = (props) => {
+		globalState.headEntity = globalState.arrayEntities[props.id]
+		setGlobalState(globalState)
+	}
+
+	if(!globalState.headEntity) {
+		const createFirstEntity = () => {
+			const id = addNode();			
+			setView({
+				id:id,
+				title:`mdtmp{id}`
+			});
+			setHead({
+				id:id
+			})
+		}
+		return (
+			<div>
+			<button onClick={createFirstEntity} >
+			Add View
+			</button>
+			</div>
+		)
+	}
 
 	return (
-		<div className="App">
-		<header className="App-header">
-		<img src={logo} className="App-logo" alt="logo" />
-		</header>
+		<div>
+		<SimpleView/>
 		</div>
-	);
+	)
 }
 
-export default App;
+function App() {
+	return (
+		<div>
+		<Selector/>
+		</div>
+	)
+}
+
+export default App
