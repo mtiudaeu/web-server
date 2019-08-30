@@ -77,3 +77,12 @@ private:
                    eh::App::get().m_msgSeparator, __VA_ARGS__,     \
                    EH_BUILD_FILE_INFO));
 
+#define RET_SUCCESS()                                             \
+  (eh::Ret());
+
+#define RET_ERROR(...)                                             \
+  (eh::Ret(true, eh::Msg::build(eh::App::get().m_msgSeparator, __VA_ARGS__,     \
+                   EH_BUILD_FILE_INFO)));
+
+
+

@@ -1,6 +1,8 @@
 #ifndef EH_MSG_H
 #define EH_MSG_H
 
+#include "ehRet.h"
+
 #include <sstream>
 #include <string>
 
@@ -44,6 +46,11 @@ template <>
 inline void add(const Separator, std::string &msg, const std::string &value) {
   msg += value;
 }
+template <>
+inline void add(const Separator, std::string &msg, const eh::Ret &ret) {
+  msg += ret.msg;
+}
+
 template <typename T, typename... Ts>
 inline void add(const Separator &separator, std::string &msg, const T &value,
                 const Ts &... args) {
