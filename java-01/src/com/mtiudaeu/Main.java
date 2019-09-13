@@ -235,7 +235,7 @@ public class Main {
 
 
 
-        Pipe<Object> end2 = new Pipe1<DataToWrite, Object>(
+        Pipe<Object> end = new Pipe1<DataToWrite, Object>(
                 new Pipe2<String, String, DataToWrite>(
                         new Pipe1<AutoKeyArray, String>(
                                 new Pipe0<AutoKeyArray>(keysFunc),
@@ -243,8 +243,9 @@ public class Main {
                         new Pipe0<String>(pathFunc),
                         mergeKeysWithPathFunc),
                 writeDataFunc);
-        end2.run();
 
+        //mdtmp end.run();
+        end.traverse(0);
 
         //mdtmp LambdaData<Object> end = writeDataFunc.run(mergeKeysWithPathFunc.run(keysToValueFunc.run(keysFunc.run()), pathFunc.run()));
         //mdtmp Pipe<Object> end2 = (new Pipe0<AutoKeyArray>(keysFunc))

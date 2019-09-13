@@ -17,4 +17,12 @@ public class Pipe2<Input1, Input2, Output> implements Pipe<Output> {
     public LambdaData<Output> run() {
         return func.run(input1.run(), input2.run());
     }
+
+    public LambdaData<Output> traverse(int i) {
+        LambdaData<Input1> ret1 = input1.traverse(i+1);
+        LambdaData<Input2> ret2 = input2.traverse(i+1);
+        LambdaData<Output> output = func.run(ret1, ret2);
+        System.out.println("Layer " + i + ", Input1 : " + ret1.data.getClass().getSimpleName() + ", Input2 : " + ret2.data.getClass().getSimpleName() + ", Output : " + output.data.getClass().getSimpleName());
+        return output;
+    }
 }

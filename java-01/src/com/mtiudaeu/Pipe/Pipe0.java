@@ -13,4 +13,10 @@ public class Pipe0<Output> implements Pipe<Output> {
     public LambdaData<Output> run() {
         return func.run();
     }
+
+    public LambdaData<Output> traverse(int i) {
+        LambdaData<Output> output = func.run();
+        System.out.println("Layer " + i + ", Output : " + output.data.getClass().getSimpleName());
+        return output;
+    }
 }
