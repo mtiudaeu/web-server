@@ -1,5 +1,9 @@
 package com.mtiudaeu;
 
+import com.mtiudaeu.Lambda.Lambda0;
+import com.mtiudaeu.Lambda.Lambda1;
+import com.mtiudaeu.Lambda.Lambda2;
+import com.mtiudaeu.Lambda.LambdaData;
 import com.mtiudaeu.pipeline.*;
 
 import java.io.IOException;
@@ -24,18 +28,7 @@ public class Main {
             return new PipelineData(data);
         }
     }
-    static public class WriteToFile extends Pipeline2<DataToWrite,Object> {
-        public PipelineData<Object> run(DataToWrite data) {
-            PipelineData ret = new PipelineData();
-            try {
-                Files.write(Paths.get(data.path), data.valueToWrite.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-                ret.setError("Fail to write file"); //mdtmp line and file....
-            }
-            return ret;
-        }
-    }
+
 
     static public class AutoKeyArray {
         static public class Keys {
@@ -52,6 +45,21 @@ public class Main {
         }
         public List<Keys> keys = new ArrayList();
     }
+    /*
+
+        static public class WriteToFile extends Pipeline2<DataToWrite,Object> {
+        public PipelineData<Object> run(DataToWrite data) {
+            PipelineData ret = new PipelineData();
+            try {
+                Files.write(Paths.get(data.path), data.valueToWrite.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+                ret.setError("Fail to write file"); //mdtmp line and file....
+            }
+            return ret;
+        }
+    }
+
     static public class AutoKeyWrap extends Pipeline2<AutoKeyArray,String> {
         public PipelineData<String> run(AutoKeyArray input) {
             String value = new String();
@@ -93,8 +101,152 @@ public class Main {
             return ret;
         }
     }
+    */
+
+    static Lambda0<AutoKeyArray> get1(){
+        return () -> {
+            AutoKeyArray keyInputs = new AutoKeyArray();
+            keyInputs.keys.add(new AutoKeyArray.Keys("0", "0", "0"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("1", "1", "z"));
+            for (Integer i = 2; i < 10; i++) {
+                keyInputs.keys.add(new AutoKeyArray.Keys(i.toString(), i.toString(), i.toString()));
+            }
+            for (Integer i = 0; i < 10; i++) {
+                keyInputs.keys.add(new AutoKeyArray.Keys("+" + i.toString(), i.toString(), "{Shift down}" + i.toString() + "{Shift up}"));
+            }
+            for (Integer i = 1; i < 6; i++) {
+                keyInputs.keys.add(new AutoKeyArray.Keys("F" + i.toString(), "F" + i.toString(), "{F" + i.toString() + "}"));
+            }
+            for (Integer i = 1; i < 6; i++) {
+                keyInputs.keys.add(new AutoKeyArray.Keys("+F" + i.toString(), "F" + i.toString(), "{Shift down}{F" + i.toString() + "}{Shift up}"));
+            }
+
+            //mouvement key
+            keyInputs.keys.add(new AutoKeyArray.Keys("Up", null, "{w down}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Up up", null, "{w up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Down", null, "{s down}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Down up", null, "{s up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Left", null, "{a down}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Left up", null, "{a up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Right", null, "{d down}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("Right up", null, "{d up}"));
+
+            keyInputs.keys.add(new AutoKeyArray.Keys("f", "f", "f"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("t", "t", "t"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("g", "g", "g"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("y", "y", "y"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+f", "f", "{Shift down}f{Shift up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+t", "t", "{Shift down}t{Shift up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+g", "g", "{Shift down}g{Shift up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+y", "y", "{Shift down}y{Shift up}"));
+
+            return new LambdaData<>(keyInputs);
+        };
+    }
+
+    static Lambda1<AutoKeyArray, String> get2(){
+        return (LambdaData<AutoKeyArray> keys) -> {
+            String value = new String();
+
+            for(AutoKeyArray.Keys it : keys.data.keys) {
+                // Input line
+                value += "~";
+                value += it.inputKeyCodes;
+                value += "::\n";
+
+                // Keywait line
+                if(it.keyWaitKeyCodes!=null){
+                    value += "KeyWait ";
+                    value += it.keyWaitKeyCodes;
+                    value += "\n";
+                }
+
+                // mdtmp todo comment
+                value += "if(State = 2)\n";
+                value += "{\n";
+
+                value += "\tIfWinActive ahk_id %wowid1%\n";
+                value += "\t{\n";
+                value += "\t\tControlSend,, "; value += it.outputKeyCodes; value += ", ahk_id %wowid2%\n";
+                value += "\t}\n";
+
+                value += "\tIfWinActive ahk_id %wowid2%\n";
+                value += "\t{\n";
+                value += "\t\tControlSend,, "; value += it.outputKeyCodes; value += ", ahk_id %wowid1%\n";
+                value += "\t}\n";
+
+                value += "}\n";
+                value += "Return\n\n";
+
+            }
+
+            return new LambdaData<>(value);
+        };
+    }
+
+    static Lambda0<String> get3(){
+        return () -> new LambdaData<>("out/tmp.txt");
+    }
+
+    static Lambda2<String, String, DataToWrite> get4(){
+        return (LambdaData<String> value, LambdaData<String> path) -> {
+            DataToWrite data = new DataToWrite();
+            data.path = path.data;
+            data.valueToWrite = value.data;
+            return new LambdaData(data);
+        };
+    }
+
+    static Lambda1<DataToWrite, Object> get5(){
+        return (LambdaData<DataToWrite> dataToWrite) -> {
+            LambdaData ret = new LambdaData<Object>();
+            try {
+                Files.write(Paths.get(dataToWrite.data.path), dataToWrite.data.valueToWrite.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+                ret.setError("Fail to write file"); //mdtmp line and file....
+            }
+            return ret;
+        };
+    }
 
     public static void main(String[] args) {
+        Lambda0<AutoKeyArray> keysFunc = get1();
+        Lambda1<AutoKeyArray, String> keysToValueFunc = get2();
+        Lambda0<String> pathFunc = get3();
+        Lambda2<String, String, DataToWrite> mergeKeysWithPathFunc = get4();
+        Lambda1<DataToWrite, Object> writeDataFunc = get5();
+/*
+        Lambda2<Lambda0<AutoKeyArray>, Lambda1<AutoKeyArray, String>, String> func1 =
+                (Lambda0<AutoKeyArray> in1, Lambda1<AutoKeyArray, String> in2)->
+                {
+                    LambdaData<AutoKeyArray> out1 = in1.run();
+                    if(out1.error){
+                        //mdtmp
+                        System.out.println(out1.errorMsg);
+                    }
+                    LambdaData<String> out2 = in2.run(out1);
+                    if(out2.error){
+                        //mdtmp
+                        System.out.println(out2.errorMsg);
+                    }
+                    return out2;
+                };
+
+        LambdaData<String> keysString = func1.run(keysFunc, keysToValueFunc);
+        LambdaData<String> path = pathFunc.run();
+        LambdaData<DataToWrite> writeToFile = mergeKeysWithPathFunc.run(keysString.data, path.data);
+        LambdaData<Object> end = writeDataFunc.run(writeToFile.data);
+*/
+
+        LambdaData<AutoKeyArray> keys = keysFunc.run();
+        LambdaData<String> keysString = keysToValueFunc.run(keys);
+        LambdaData<String> path = pathFunc.run();
+        LambdaData<DataToWrite> writeToFile = mergeKeysWithPathFunc.run(keysString, path);
+        LambdaData<Object> end = writeDataFunc.run(writeToFile);
+
+
+        /*
         Pipeline1<AutoKeyArray> keyArray = (() -> {
             AutoKeyArray keyInputs = new AutoKeyArray();
             keyInputs.keys.add(new AutoKeyArray.Keys("0", "0", "0"));
@@ -143,5 +295,6 @@ public class Main {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        */
     }
 }
