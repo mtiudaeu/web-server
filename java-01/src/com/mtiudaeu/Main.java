@@ -210,12 +210,26 @@ public class Main {
         };
     }
 
+    static class PipeInput0Output1<Output1> implements Lambda0<Output1> {
+        PipeInput0Output1(Lambda0<Output1> func){
+            this.func = func;
+        }
+        private  Lambda0<Output1> func;
+
+        public LambdaData<Output1> run() {
+            return func.run();
+        }
+    }
+
     public static void main(String[] args) {
         Lambda0<AutoKeyArray> keysFunc = get1();
         Lambda1<AutoKeyArray, String> keysToValueFunc = get2();
         Lambda0<String> pathFunc = get3();
         Lambda2<String, String, DataToWrite> mergeKeysWithPathFunc = get4();
         Lambda1<DataToWrite, Object> writeDataFunc = get5();
+
+        LambdaData<Object> end = writeDataFunc.run(mergeKeysWithPathFunc.run(keysToValueFunc.run(keysFunc.run()), pathFunc.run()));
+
 /*
         Lambda2<Lambda0<AutoKeyArray>, Lambda1<AutoKeyArray, String>, String> func1 =
                 (Lambda0<AutoKeyArray> in1, Lambda1<AutoKeyArray, String> in2)->
@@ -238,13 +252,13 @@ public class Main {
         LambdaData<DataToWrite> writeToFile = mergeKeysWithPathFunc.run(keysString.data, path.data);
         LambdaData<Object> end = writeDataFunc.run(writeToFile.data);
 */
-
+/*
         LambdaData<AutoKeyArray> keys = keysFunc.run();
         LambdaData<String> keysString = keysToValueFunc.run(keys);
         LambdaData<String> path = pathFunc.run();
         LambdaData<DataToWrite> writeToFile = mergeKeysWithPathFunc.run(keysString, path);
         LambdaData<Object> end = writeDataFunc.run(writeToFile);
-
+*/
 
         /*
         Pipeline1<AutoKeyArray> keyArray = (() -> {
