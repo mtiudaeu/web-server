@@ -22,7 +22,22 @@ public class Pipe2<Input1, Input2, Output> implements Pipe<Output> {
         LambdaData<Input1> ret1 = input1.traverse(i+1);
         LambdaData<Input2> ret2 = input2.traverse(i+1);
         LambdaData<Output> output = func.run(ret1, ret2);
-        System.out.println("Layer " + i + ", Input1 : " + ret1.data.getClass().getSimpleName() + ", Input2 : " + ret2.data.getClass().getSimpleName() + ", Output : " + output.data.getClass().getSimpleName());
+
+        System.out.print("Layer " + i);
+        if(ret1.data!=null) {
+            //mdtmp ish...
+            System.out.print(", Input1 : " + ret1.data.getClass().getSimpleName());
+        }
+        if(ret2.data!=null) {
+            //mdtmp ish...
+            System.out.print(", Input2 : " + ret2.data.getClass().getSimpleName());
+        }
+        if(output.data!=null) {
+            //mdtmp ish...
+            System.out.print(", Output : " + output.data.getClass().getSimpleName());
+        }
+        System.out.println("");
+
         return output;
     }
 }

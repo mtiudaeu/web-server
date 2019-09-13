@@ -232,9 +232,6 @@ public class Main {
         Lambda2<String, String, DataToWrite> mergeKeysWithPathFunc = get4();
         Lambda1<DataToWrite, Object> writeDataFunc = get5();
 
-
-
-
         Pipe<Object> end = new Pipe1<DataToWrite, Object>(
                 new Pipe2<String, String, DataToWrite>(
                         new Pipe1<AutoKeyArray, String>(
