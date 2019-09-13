@@ -1,5 +1,9 @@
 package com.mtiudaeu;
 
+import com.mtiudaeu.pipeline.DefaultPipeline;
+import com.mtiudaeu.pipeline.Pipeline2;
+import com.mtiudaeu.pipeline.Pipeline3;
+import com.mtiudaeu.pipeline.PipelineData;
 import javafx.util.Pair;
 
 import javax.xml.crypto.Data;
@@ -10,84 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static public class PipelineData<T> {
-        public String errorMsg;
-        public boolean error = false;
-
-        public T data;
-
-        public void setError(String msg){
-            errorMsg = msg;
-            error = true;
-        }
-        public void clearError(){
-            error = false;
-            errorMsg = "";
-        }
-    }
-
-
-    abstract static public class Pipeline2<A,B> {
-        abstract public PipelineData<B> run(A data);
-    }
-    static public class Pipeline3<A,B,C> extends Pipeline2<A,C> {
-        private Pipeline2<A,B> func1;
-        private Pipeline2<B,C> func2;
-
-        Pipeline3(Pipeline2<A,B> func1, Pipeline2<B,C> func2) {
-            this.func1 = func1;
-            this.func2 = func2;
-        }
-
-        public PipelineData<C> run(A input1) {
-            PipelineData<B> input2 = func1.run(input1);
-            if(input2.error) {
-                PipelineData<C> error = new PipelineData<C>();
-                error.setError(input2.errorMsg);
-                return error;
-            }
-            return func2.run(input2.data);
-        }
-    }
-
-    static class MergeData<A,B> {
-        public MergeData(A data1, B data2) {
-            this.data1 = data1;
-            this.data2 = data2;
-        }
-        A data1;
-        B data2;
-    }
-    abstract static public class PipelineMerge3<A,B,Z> extends Pipeline2<MergeData<A,B>, Z> {
-        public PipelineData<Z> run(MergeData<A,B> data) {
-            return run(data.data1, data.data2);
-        }
-        abstract public PipelineData<Z> run(A input1, B input2);
-    }
-
-    static public class DefaultPipeline<A,B> extends Pipeline2<A,B> {
-        private Pipeline2<A,B> func;
-
-        DefaultPipeline(Pipeline2<A,B> func) {
-            this.func = func;
-        }
-
-        public PipelineData<B> run(A input) {
-            return func.run(input);
-        }
-
-        public PipelineData<B> runDefault (A input) throws Exception {
-            PipelineData<B> output = run(input);
-            if(output.error) {
-                System.out.println(output.errorMsg); //mdtmp
-                Exception e = new Exception(output.errorMsg);
-                e.printStackTrace();
-                throw e;
-            }
-            return output;
-        }
-    }
-
 
 
 
@@ -193,17 +119,6 @@ public class Main {
     }
 
 
-    static public class AutoKeyMerge extends PipelineMerge3<String,String,DataToWrite> {
-        public PipelineData<DataToWrite> run(String input1, String input2) {
-            PipelineData ret = new PipelineData();
-            DataToWrite data = new DataToWrite();
-            data.path = input1;
-            data.valueToWrite = input2;
-            ret.data = data;
-            return ret;
-        }
-    }
-
 
 
     public static void main(String[] args) {
@@ -247,6 +162,35 @@ public class Main {
 
 
         /*
+
+    static public class AutoKeyMerge extends PipelineMerge3<String,String,DataToWrite> {
+        public PipelineData<DataToWrite> run(String input1, String input2) {
+            PipelineData ret = new PipelineData();
+            DataToWrite data = new DataToWrite();
+            data.path = input1;
+            data.valueToWrite = input2;
+            ret.data = data;
+            return ret;
+        }
+    }
+
+
+
+    static class MergeData<A,B> {
+        public MergeData(A data1, B data2) {
+            this.data1 = data1;
+            this.data2 = data2;
+        }
+        A data1;
+        B data2;
+    }
+    abstract static public class PipelineMerge3<A,B,Z> extends Pipeline2<MergeData<A,B>, Z> {
+        public PipelineData<Z> run(MergeData<A,B> data) {
+            return run(data.data1, data.data2);
+        }
+        abstract public PipelineData<Z> run(A input1, B input2);
+    }
+
         PipelineMerge3 pipelineMerge3 = new AutoKeyMerge();
         DefaultPipeline<MergeData<String,String>,DataToWrite> pipeline = new DefaultPipeline(pipelineMerge3);
 
