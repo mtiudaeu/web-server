@@ -157,18 +157,16 @@ public class Main {
 
                 value += "\tIfWinActive ahk_id %wowid1%\n";
                 value += "\t{\n";
-                value += "\tControlSend,, "; value += it.outputKeyCodes; value += ", ahk_id %wowid2%\n";
+                value += "\t\tControlSend,, "; value += it.outputKeyCodes; value += ", ahk_id %wowid2%\n";
                 value += "\t}\n";
 
-                value += "if(State = 2)\n";
-                value += "{\n";
                 value += "\tIfWinActive ahk_id %wowid2%\n";
                 value += "\t{\n";
-                value += "\tControlSend,, "; value += it.outputKeyCodes; value += ", ahk_id %wowid1%\n";
+                value += "\t\tControlSend,, "; value += it.outputKeyCodes; value += ", ahk_id %wowid1%\n";
                 value += "\t}\n";
 
                 value += "}\n";
-                value += "Return\n";
+                value += "Return\n\n";
 
             }
 
@@ -193,6 +191,36 @@ public class Main {
 
 
     public static void main(String[] args) {
+         class DataOutputPath extends Pipeline2<String,DataToWrite> {
+            public PipelineData<DataToWrite> run(String valueToWrite) {
+                //mdtmp hardcoded
+                String path = "out/tmp.txt";
+
+                PipelineData ret = new PipelineData();
+                DataToWrite data = new DataToWrite();
+                data.path = path;
+                data.valueToWrite = valueToWrite;
+                ret.data = data;
+                return ret;
+            }
+        }
+
+        AutoKeyWrap wrap = new AutoKeyWrap();
+        Pipeline3<AutoKeyArray, String, DataToWrite> prepareToWrite = new Pipeline3<AutoKeyArray, String, DataToWrite>(wrap, new DataOutputPath());
+        Pipeline3<AutoKeyArray, DataToWrite, Object> finalPipeline = new Pipeline3<AutoKeyArray, DataToWrite, Object>(prepareToWrite, new WriteToFile());
+
+        DefaultPipeline<AutoKeyArray, Object> pipeline = new DefaultPipeline<AutoKeyArray, Object>(finalPipeline);
+        try {
+            AutoKeyArray keyInputs = new AutoKeyArray();
+            keyInputs.keys.add(new AutoKeyArray.Keys("1", "1", "1"));
+            PipelineData<Object> output = pipeline.runDefault(keyInputs);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        /*
         PipelineMerge3 pipelineMerge3 = new AutoKeyMerge();
         DefaultPipeline<MergeData<String,String>,DataToWrite> pipeline = new DefaultPipeline(pipelineMerge3);
 
@@ -209,7 +237,7 @@ public class Main {
             System.out.println(":(:( BOOOM ...");
             e.printStackTrace();
         }
-
+*/
         /*
         Pipeline3<String, DataToWrite, Object> pipelinedTest = new Pipeline3(new GetPathAndGenerateValue(), new WriteToFile());
         DefaultPipeline<String,Object> pipeline = new DefaultPipeline(pipelinedTest);
