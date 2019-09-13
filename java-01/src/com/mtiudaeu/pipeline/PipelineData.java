@@ -1,6 +1,12 @@
 package com.mtiudaeu.pipeline;
 
 public class PipelineData<T> {
+    public PipelineData(){}
+
+    public PipelineData(T data){
+        this.data = data;
+    }
+
     public String errorMsg;
     public boolean error = false;
 

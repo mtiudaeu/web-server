@@ -1,9 +1,7 @@
 package com.mtiudaeu;
 
 import com.mtiudaeu.pipeline.*;
-import javafx.util.Pair;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,12 +18,10 @@ public class Main {
             super(data);
         }
         public PipelineData<DataToWrite> run(String valueToWrite) {
-            PipelineData ret = new PipelineData();
             DataToWrite data = new DataToWrite();
             data.path = this.data;
             data.valueToWrite = valueToWrite;
-            ret.data = data;
-            return ret;
+            return new PipelineData(data);
         }
     }
     static public class WriteToFile extends Pipeline2<DataToWrite,Object> {
@@ -99,15 +95,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
-        AddPathToDataToWrite path = new AddPathToDataToWrite("out/tmp.txt");
-
-        AutoKeyWrap wrap = new AutoKeyWrap();
-        Pipeline3<AutoKeyArray, String, DataToWrite> prepareToWrite = new Pipeline3<AutoKeyArray, String, DataToWrite>(wrap, path);
-        Pipeline3<AutoKeyArray, DataToWrite, Object> finalPipeline = new Pipeline3<AutoKeyArray, DataToWrite, Object>(prepareToWrite, new WriteToFile());
-
-        DefaultPipeline<AutoKeyArray, Object> pipeline = new DefaultPipeline<AutoKeyArray, Object>(finalPipeline);
-        try {
+        Pipeline1<AutoKeyArray> keyArray = (() -> {
             AutoKeyArray keyInputs = new AutoKeyArray();
             keyInputs.keys.add(new AutoKeyArray.Keys("0", "0", "0"));
             keyInputs.keys.add(new AutoKeyArray.Keys("1", "1", "z"));
@@ -120,6 +108,9 @@ public class Main {
             for(Integer i=1; i<6; i++) {
                 keyInputs.keys.add(new AutoKeyArray.Keys("F"+i.toString(), "F"+i.toString(), "{F"+i.toString()+"}"));
             }
+            for(Integer i=1; i<6; i++) {
+                keyInputs.keys.add(new AutoKeyArray.Keys("+F"+i.toString(), "F"+i.toString(), "{Shift down}{F"+i.toString()+"}{Shift up}"));
+            }
 
             //mouvement key
             keyInputs.keys.add(new AutoKeyArray.Keys("Up", null, "{w down}"));
@@ -131,7 +122,24 @@ public class Main {
             keyInputs.keys.add(new AutoKeyArray.Keys("Right", null, "{d down}"));
             keyInputs.keys.add(new AutoKeyArray.Keys("Right up", null, "{d up}"));
 
-            PipelineData<Object> output = pipeline.runDefault(keyInputs); //Add all in DataPipeline class. no parameter to runDefault.
+            keyInputs.keys.add(new AutoKeyArray.Keys("f", "f", "f"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("t", "t", "t"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("g", "g", "g"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("y", "y", "y"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+f", "f", "{Shift down}f{Shift up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+t", "t", "{Shift down}t{Shift up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+g", "g", "{Shift down}g{Shift up}"));
+            keyInputs.keys.add(new AutoKeyArray.Keys("+y", "y", "{Shift down}y{Shift up}"));
+
+            return new PipelineData<AutoKeyArray>(keyInputs);
+        });
+
+        Pipeline3<AutoKeyArray, String, DataToWrite> prepareToWrite = new Pipeline3<AutoKeyArray, String, DataToWrite>(new AutoKeyWrap(), new AddPathToDataToWrite("out/tmp.txt"));
+        Pipeline3<AutoKeyArray, DataToWrite, Object> finalPipeline = new Pipeline3<AutoKeyArray, DataToWrite, Object>(prepareToWrite, new WriteToFile());
+
+        DefaultPipeline<AutoKeyArray, Object> pipeline = new DefaultPipeline<AutoKeyArray, Object>(keyArray, finalPipeline);
+        try {
+            PipelineData<Object> output = pipeline.runDefault(); //Add all in DataPipeline class. no parameter to runDefault.
         } catch(Exception e) {
             e.printStackTrace();
         }
