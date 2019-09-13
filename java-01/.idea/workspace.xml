@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ee66d34d-fbd2-4eab-9c64-92559eaf73a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Pipe1.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/mtiudaeu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/mtiudaeu/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="220" column="9" lean-forward="true" selection-start-line="220" selection-start-column="9" selection-end-line="220" selection-end-column="9" />
+            <state relative-caret-position="368">
+              <caret line="234" column="16" selection-start-line="234" selection-start-column="16" selection-end-line="234" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#859#860#0" expanded="true" />
@@ -28,44 +28,20 @@
                 <element signature="e#7152#7153#0" expanded="true" />
                 <element signature="e#8077#8078#0" expanded="true" />
                 <element signature="e#8104#8105#0" expanded="true" />
-                <element signature="e#8278#8279#0" expanded="true" />
+                <element signature="e#8405#8406#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda0.java">
+        <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Pipe1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="50" />
+            <state relative-caret-position="180">
+              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,10 +91,18 @@
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/LambdaInput1Output1.java" />
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/LambdaInput2Output1.java" />
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda2.java" />
-        <option value="$PROJECT_DIR$/out/tmp.txt" />
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda1.java" />
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/TMP.java" />
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Pipe1.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Lambda0.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Lambda.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Lambda1.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Pipe.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Pipe1.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe1.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe0.java" />
+        <option value="$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe2.java" />
+        <option value="$PROJECT_DIR$/out/tmp.txt" />
         <option value="$PROJECT_DIR$/src/com/mtiudaeu/Main.java" />
       </list>
     </option>
@@ -171,6 +155,13 @@
               <item name="java-01" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="mtiudaeu" type="462c0819:PsiDirectoryNode" />
+              <item name="Pipe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java-01" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java-01" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mtiudaeu" type="462c0819:PsiDirectoryNode" />
               <item name="pipeline" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -183,10 +174,12 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568403146450" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568404912658" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mtiudaeu.Pipe" />
+      <recent name="com.mtiudaeu.Lambda2" />
       <recent name="com.mtiudaeu.Lambda" />
     </key>
   </component>
@@ -230,12 +223,12 @@
       <updated>1568131035200</updated>
       <workItem from="1568131044360" duration="9290000" />
       <workItem from="1568384603530" duration="992000" />
-      <workItem from="1568386073990" duration="13925000" />
+      <workItem from="1568386073990" duration="15426000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24207000" />
+    <option name="totallyTimeSpent" value="25708000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -249,7 +242,7 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.16468039" />
       <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.20476706" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -326,13 +319,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/pipeline/Pipeline3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/pipeline/Pipeline2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -351,17 +337,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/pipeline/PipelineDataMerge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="e#163#164#0" expanded="true" />
-            <element signature="e#195#196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/LambdaInput1Output2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -375,9 +350,6 @@
           <caret line="2" column="23" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="23" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/tmp.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/TMP.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -393,10 +365,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda1.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Lambda0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="30" lean-forward="true" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/pipeline/PipelineDataMerge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="41" />
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Lambda1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda2/Lambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+          <folding>
+            <element signature="e#274#275#0" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#404#405#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -407,17 +437,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda0.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Lambda/Lambda1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="30" />
+        <state relative-caret-position="40">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/tmp.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/pipeline/Pipeline3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Pipe/Pipe1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mtiudaeu/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="220" column="9" lean-forward="true" selection-start-line="220" selection-start-column="9" selection-end-line="220" selection-end-column="9" />
+        <state relative-caret-position="368">
+          <caret line="234" column="16" selection-start-line="234" selection-start-column="16" selection-end-line="234" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#859#860#0" expanded="true" />
@@ -426,7 +476,7 @@
             <element signature="e#7152#7153#0" expanded="true" />
             <element signature="e#8077#8078#0" expanded="true" />
             <element signature="e#8104#8105#0" expanded="true" />
-            <element signature="e#8278#8279#0" expanded="true" />
+            <element signature="e#8405#8406#0" expanded="true" />
           </folding>
         </state>
       </provider>

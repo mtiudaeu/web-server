@@ -4,6 +4,10 @@ import com.mtiudaeu.Lambda.Lambda0;
 import com.mtiudaeu.Lambda.Lambda1;
 import com.mtiudaeu.Lambda.Lambda2;
 import com.mtiudaeu.Lambda.LambdaData;
+import com.mtiudaeu.Pipe.Pipe;
+import com.mtiudaeu.Pipe.Pipe0;
+import com.mtiudaeu.Pipe.Pipe1;
+import com.mtiudaeu.Pipe.Pipe2;
 import com.mtiudaeu.pipeline.*;
 
 import java.io.IOException;
@@ -228,8 +232,22 @@ public class Main {
         Lambda2<String, String, DataToWrite> mergeKeysWithPathFunc = get4();
         Lambda1<DataToWrite, Object> writeDataFunc = get5();
 
-        LambdaData<Object> end = writeDataFunc.run(mergeKeysWithPathFunc.run(keysToValueFunc.run(keysFunc.run()), pathFunc.run()));
 
+
+
+        Pipe<Object> end2 = new Pipe1<DataToWrite, Object>(
+                new Pipe2<String, String, DataToWrite>(
+                        new Pipe1<AutoKeyArray, String>(
+                                new Pipe0<AutoKeyArray>(keysFunc),
+                                keysToValueFunc),
+                        new Pipe0<String>(pathFunc),
+                        mergeKeysWithPathFunc),
+                writeDataFunc);
+        end2.run();
+
+
+        //mdtmp LambdaData<Object> end = writeDataFunc.run(mergeKeysWithPathFunc.run(keysToValueFunc.run(keysFunc.run()), pathFunc.run()));
+        //mdtmp Pipe<Object> end2 = (new Pipe0<AutoKeyArray>(keysFunc))
 /*
         Lambda2<Lambda0<AutoKeyArray>, Lambda1<AutoKeyArray, String>, String> func1 =
                 (Lambda0<AutoKeyArray> in1, Lambda1<AutoKeyArray, String> in2)->
