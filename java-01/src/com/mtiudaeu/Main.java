@@ -1,9 +1,6 @@
 package com.mtiudaeu;
 
-import com.mtiudaeu.pipeline.DefaultPipeline;
-import com.mtiudaeu.pipeline.Pipeline2;
-import com.mtiudaeu.pipeline.Pipeline3;
-import com.mtiudaeu.pipeline.PipelineData;
+import com.mtiudaeu.pipeline.*;
 import javafx.util.Pair;
 
 import javax.xml.crypto.Data;
@@ -14,22 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
-
-
     static public class DataToWrite {
         public String path;
         public String valueToWrite;
     }
-    static public class AddPathToDataToWrite extends Pipeline2<String,DataToWrite> {
-        private String path;
-        public AddPathToDataToWrite(String path){
-            this.path = path;
+    static public class AddPathToDataToWrite extends PipelineDataMerge<String, String,DataToWrite> {
+        public AddPathToDataToWrite(String data) {
+            super(data);
         }
         public PipelineData<DataToWrite> run(String valueToWrite) {
             PipelineData ret = new PipelineData();
             DataToWrite data = new DataToWrite();
-            data.path = this.path;
+            data.path = this.data;
             data.valueToWrite = valueToWrite;
             ret.data = data;
             return ret;
@@ -44,19 +37,6 @@ public class Main {
                 e.printStackTrace();
                 ret.setError("Fail to write file"); //mdtmp line and file....
             }
-            return ret;
-        }
-    }
-    static public class GetPathAndGenerateValue extends Pipeline2<String,DataToWrite> {
-        public PipelineData<DataToWrite> run(String input) {
-            PipelineData ret = new PipelineData();
-
-            DataToWrite data = new DataToWrite();
-            data.path = input;
-            data.valueToWrite = "mdtmp NEW";
-
-            ret.data = data;
-
             return ret;
         }
     }
@@ -118,9 +98,6 @@ public class Main {
         }
     }
 
-
-
-
     public static void main(String[] args) {
 
         AddPathToDataToWrite path = new AddPathToDataToWrite("out/tmp.txt");
@@ -154,70 +131,9 @@ public class Main {
             keyInputs.keys.add(new AutoKeyArray.Keys("Right", null, "{d down}"));
             keyInputs.keys.add(new AutoKeyArray.Keys("Right up", null, "{d up}"));
 
-            PipelineData<Object> output = pipeline.runDefault(keyInputs);
+            PipelineData<Object> output = pipeline.runDefault(keyInputs); //Add all in DataPipeline class. no parameter to runDefault.
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-
-
-        /*
-
-    static public class AutoKeyMerge extends PipelineMerge3<String,String,DataToWrite> {
-        public PipelineData<DataToWrite> run(String input1, String input2) {
-            PipelineData ret = new PipelineData();
-            DataToWrite data = new DataToWrite();
-            data.path = input1;
-            data.valueToWrite = input2;
-            ret.data = data;
-            return ret;
-        }
-    }
-
-
-
-    static class MergeData<A,B> {
-        public MergeData(A data1, B data2) {
-            this.data1 = data1;
-            this.data2 = data2;
-        }
-        A data1;
-        B data2;
-    }
-    abstract static public class PipelineMerge3<A,B,Z> extends Pipeline2<MergeData<A,B>, Z> {
-        public PipelineData<Z> run(MergeData<A,B> data) {
-            return run(data.data1, data.data2);
-        }
-        abstract public PipelineData<Z> run(A input1, B input2);
-    }
-
-        PipelineMerge3 pipelineMerge3 = new AutoKeyMerge();
-        DefaultPipeline<MergeData<String,String>,DataToWrite> pipeline = new DefaultPipeline(pipelineMerge3);
-
-        try {
-            AutoKeyArray keyInputs = new AutoKeyArray();
-            keyInputs.keys.add(new AutoKeyArray.Keys("1", "1", "1"));
-            MergeData<String,String> input = new MergeData("out/tmp.txt", keyInputs);
-            PipelineData<DataToWrite> data = pipeline.runDefault(input);
-            //mdtmp connect to write file after
-            System.out.println(data.data.path);
-            System.out.println(data.data.valueToWrite);
-        } catch(Exception e) {
-            //mdtmp ...
-            System.out.println(":(:( BOOOM ...");
-            e.printStackTrace();
-        }
-*/
-        /*
-        Pipeline3<String, DataToWrite, Object> pipelinedTest = new Pipeline3(new GetPathAndGenerateValue(), new WriteToFile());
-        DefaultPipeline<String,Object> pipeline = new DefaultPipeline(pipelinedTest);
-
-        try {
-            PipelineData<Object> output = pipeline.runDefault("out/tmp.txt");
-        } catch(Exception e) {
-            //mdtmp ...
-        }
-        */
-
     }
 }
