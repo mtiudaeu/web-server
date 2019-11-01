@@ -45,12 +45,17 @@ fn create_autokey_array_from_file(filename: &'static str) -> Vec<AutokeyKey> {
   let data = fs::read_to_string(filename).expect("Unable to read file");
   for line in data.lines() {
     let keys_str : Vec<&str> = line.split(",").collect();
-    if keys_str.len() !=3 {
-       println!("Wrong number of parameter for line : {}", line);
-       continue;
+    if keys_str.len() ==1 {
+      key_array.push(
+        create_autokey_key(keys_str[0].to_string(), keys_str[0].to_string(), keys_str[0].to_string()));
     }
-    let key = create_autokey_key(keys_str[0].to_string(), keys_str[1].to_string(), keys_str[2].to_string());
-    key_array.push(key);
+    else if keys_str.len() ==3 {
+      key_array.push(
+        create_autokey_key(keys_str[0].to_string(), keys_str[1].to_string(), keys_str[2].to_string()));
+    }
+    else {
+       println!("Wrong number of parameter for line : {}", line);
+    }
   }
 
   return key_array;

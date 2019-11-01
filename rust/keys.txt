@@ -1,3 +1,38 @@
+a
+b
+c
+d
+e
+f
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
 Up,null,{w down}
 Up up,null,{w up}
 Down,null,{s down}
@@ -6,11 +41,17 @@ Left,null,{a down}
 Left up,null,{a up}
 Right,null,{d down}
 Right up,null,{d up}
-f, f, f
-t, t, t
-g, g, g
-y, y, y
-+f, f, {Shift down}f{Shift up}
-+t, t, {Shift down}t{Shift up}
-+g, g, {Shift down}g{Shift up}
-+y, y, {Shift down}y{Shift up}
++f,f,{Shift down}f{Shift up}
++t,t,{Shift down}t{Shift up}
++g,g,{Shift down}g{Shift up}
++y,y,{Shift down}y{Shift up}
++F1,F1,{Shift down}{F1}{Shift up}
++F2,F2,{Shift down}{F2}{Shift up}
++F3,F3,{Shift down}{F3}{Shift up}
++F4,F4,{Shift down}{F4}{Shift up}
++F5,F5,{Shift down}{F5}{Shift up}
+F1,F1,{F1}
+F2,F2,{F2}
+F3,F3,{F3}
+F4,F4,{F4}
+F5,F5,{F5}
