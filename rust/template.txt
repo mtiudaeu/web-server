@@ -1,0 +1,32 @@
+~#input_key_code#::
+KeyWait  #key_wait_key_code#
+if(State = 1)
+{
+	IfWinActive ahk_id %wowid1%
+	{
+		ControlSend,,  #output_key_code#, ahk_id %wowid1%
+	}
+	IfWinActive ahk_id %wowid2%
+	{
+		ControlSend,,  #output_key_code#, ahk_id %wowid2%
+	}
+}
+if(State = 2)
+{
+	IfWinActive ahk_id %wowid1%
+	{
+		ControlSend,,  #output_key_code#, ahk_id %wowid2%
+	}
+	IfWinActive ahk_id %wowid2%
+	{
+		ControlSend,,  #output_key_code#, ahk_id %wowid1%
+	}
+}
+if(State = 3)
+{
+	ControlSend,,  #output_key_code#, ahk_id %wowid1%
+	ControlSend,,  #output_key_code#, ahk_id %wowid2%
+}
+Return
+
+

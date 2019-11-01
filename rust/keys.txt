@@ -1,0 +1,16 @@
+Up,null,{w down}
+Up up,null,{w up}
+Down,null,{s down}
+Down up,null,{s up}
+Left,null,{a down}
+Left up,null,{a up}
+Right,null,{d down}
+Right up,null,{d up}
+f, f, f
+t, t, t
+g, g, g
+y, y, y
++f, f, {Shift down}f{Shift up}
++t, t, {Shift down}t{Shift up}
++g, g, {Shift down}g{Shift up}
++y, y, {Shift down}y{Shift up}
