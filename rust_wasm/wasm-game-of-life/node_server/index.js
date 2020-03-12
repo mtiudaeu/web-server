@@ -1,7 +1,7 @@
 import * as wasm from "wasm-game-of-life";
 
-var input = `
-a
+var input = 
+`a
 b
 c
 d
@@ -57,12 +57,10 @@ F1,F1,{F1}
 F2,F2,{F2}
 F3,F3,{F3}
 F4,F4,{F4}
-F5,F5,{F5}
-`;
+F5,F5,{F5}`;
 
 
-var template = `
-~#input_key_code#::
+var template = `~#input_key_code#::
 KeyWait  #key_wait_key_code#
 if(State = 1)
 {
@@ -94,23 +92,30 @@ if(State = 3)
 Return
 `;
 
+init();
 
-wasm.greet(input, template);
+function init() {
+  var inputElem = document.getElementById("input1");
+  inputElem.value = input;
 
+  var templateElem = document.getElementById("template1");
+  templateElem.value = template;
 
-//mdtmp
-// 1- get id for (input) text box one
-// 2- get id for (output) text box one
-// 2- get id from a button
-// 4- prefill input with autokey input config
-// 5- add listener to a button
-// 6- listener -> run a rust algorithm
-//    -> pass string instead of reading file.
+  var buttonElem = document.getElementById("button1");
+  buttonElem.addEventListener("click", generate_output);
+}
 
-// Maybe a lot of compilation error.... don't know
+function generate_output() {
+  var inputElem = document.getElementById("input1");
+  var inputParam = inputElem.value;
 
+  var templateElem = document.getElementById("template1");
+  var templateParam = templateElem.value;
 
+  var data = wasm.greet(inputParam, templateParam);
 
-
+  var outputElem = document.getElementById("output1");
+  outputElem.value = data;
+}
 
 

@@ -14,9 +14,11 @@ extern {
 }
 
 #[wasm_bindgen]
-pub fn greet(input: &str, template: &str) {
-//mdtmp use template
-    alert(&format!("Hello, {}!", input));
+pub fn greet(input: &str, template: &str) -> String {
+    let key_array = create_autokey_array_from_file(input.to_string());
+    let value = resolve_to_autokey_syntax(template.to_string(), key_array);
+
+    return value;
 }
 
 //----- AutokeyKey
@@ -36,15 +38,8 @@ fn create_autokey_key (
   };
 }
 
-//mdtmp move all the code below up
-//      and change reading files to using the input str 
-
-/*
-
-
 //----- resolve_to_autokey_syntax
-fn resolve_to_autokey_syntax (filename: &'static str, key_array: Vec<AutokeyKey>) -> String {
-  let input_template = fs::read_to_string(filename).expect("Unable to read file");
+fn resolve_to_autokey_syntax (input_template: String, key_array: Vec<AutokeyKey>) -> String {
 
   let mut ret : String = String::new();
   for key in key_array.iter() {
@@ -64,12 +59,9 @@ fn resolve_to_autokey_syntax (filename: &'static str, key_array: Vec<AutokeyKey>
   return ret;
 }
 
-
-
-fn create_autokey_array_from_file(filename: &'static str) -> Vec<AutokeyKey> {
+fn create_autokey_array_from_file(data: String) -> Vec<AutokeyKey> {
   let mut key_array : Vec<AutokeyKey> = Vec::new();
 
-  let data = fs::read_to_string(filename).expect("Unable to read file");
   for line in data.lines() {
     let keys_str : Vec<&str> = line.split(",").collect();
     if keys_str.len() ==1 {
@@ -88,10 +80,3 @@ fn create_autokey_array_from_file(filename: &'static str) -> Vec<AutokeyKey> {
   return key_array;
 }
 
-
-
-fn main() {
-  let key_array = create_autokey_array_from_file("keys.txt");
-  let value = resolve_to_autokey_syntax("template.txt", key_array);
-  fs::write("foo.txt", value).expect("Unable to write file");
-}*/
